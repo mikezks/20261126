@@ -3,10 +3,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Flight, FlightClient } from './flight-client';
+import { FlightClient } from './flight-client';
+import { FlightStore } from './flight-store';
+import { initialPieceCount } from '../luggage/piece-count';
 
 @Component({
   selector: 'app-flight-search',
+  providers: [FlightStore],
   imports: [MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './flight-search.html',
   styleUrl: './flight-search.scss',
@@ -14,19 +17,20 @@ import { Flight, FlightClient } from './flight-client';
 export class FlightSearch {
   private readonly client = inject(FlightClient);
   private readonly destroyRef = inject(DestroyRef);
-  protected readonly flights = signal<Flight[]>([]);
+  protected readonly store = inject(FlightStore);
+  protected readonly displayedCount = initialPieceCount;
   protected readonly status = signal<'ready' | 'loading' | 'done' | 'error'>('ready');
 
   protected submit(event: Event, from: string, to: string) {
     event.preventDefault();
     if (!from.trim() || !to.trim() || this.status() === 'loading') return;
     this.status.set('loading');
-    this.flights.set([]);
+    this.store.replace([]);
     this.client.search({ from: from.trim(), to: to.trim() })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: flights => {
-          this.flights.set(flights);
+          this.store.replace(flights);
           this.status.set('done');
         },
         error: () => this.status.set('error'),

@@ -14,8 +14,9 @@
   @if (status() === 'error') {
     <p role="alert">Search is temporarily unavailable.</p>
   } @else if (status() === 'done') {
+    <p data-testid="flight-count">Matching flights: {{ displayedCount }}</p>
     <ul aria-label="Matching flights">
-      @for (flight of flights(); track flight.id) {
+      @for (flight of store.flights(); track flight.id) {
         <li><strong>{{ flight.number }}</strong> · {{ flight.from }} → {{ flight.to }}</li>
       } @empty {
         <li>No matching flights.</li>

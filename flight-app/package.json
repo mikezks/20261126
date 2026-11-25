@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "fixtures": "node dev/fixtures.mjs",
-    "test:search": "ng test --watch=false --include=src/app/domains/ticketing/flight-search.spec.ts"
+    "test:search": "ng test --watch=false --include=src/app/domains/ticketing/flight-search.spec.ts",
+    "sheriff": "sheriff verify src/main.ts",
+    "test:count": "ng test --watch=false --include=src/app/domains/ticketing/flight-count.spec.ts"
   },
   "private": true,
   "packageManager": "npm@11.9.0",
@@ -21,6 +23,7 @@
     "@angular/material": "22.3.0",
     "@angular/platform-browser": "^22.3.0",
     "@angular/router": "^22.3.0",
+    "@ngrx/signals": "22.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -28,6 +31,7 @@
     "@angular/build": "^22.3.0",
     "@angular/cli": "^22.3.0",
     "@angular/compiler-cli": "^22.3.0",
+    "@softarc/sheriff-core": "0.20.0",
     "jsdom": "^31.0.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
