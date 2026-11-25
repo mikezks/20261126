@@ -5,7 +5,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FlightClient } from './flight-client';
 import { FlightStore } from './flight-store';
-import { initialPieceCount } from '../luggage/piece-count';
 
 @Component({
   selector: 'app-flight-search',
@@ -18,7 +17,6 @@ export class FlightSearch {
   private readonly client = inject(FlightClient);
   private readonly destroyRef = inject(DestroyRef);
   protected readonly store = inject(FlightStore);
-  protected readonly displayedCount = initialPieceCount;
   protected readonly status = signal<'ready' | 'loading' | 'done' | 'error'>('ready');
 
   protected submit(event: Event, from: string, to: string) {
