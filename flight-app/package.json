@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "fixtures": "node dev/fixtures.mjs"
+    "fixtures": "node dev/fixtures.mjs",
+    "test:search": "ng test --watch=false --include=src/app/domains/ticketing/flight-search.spec.ts"
   },
   "private": true,
   "packageManager": "npm@11.9.0",

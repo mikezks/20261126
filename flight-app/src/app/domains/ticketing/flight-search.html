@@ -1,10 +1,25 @@
 <main>
   <h1>Flight Search</h1>
-  <form (submit)="submit($event)">
-    <label for="from">Origin</label>
-    <input id="from" name="from" required />
-    <label for="to">To</label>
-    <input id="to" name="to" required />
-    <button type="submit">Search</button>
+  <form (submit)="submit($event, origin.value, destination.value)">
+    <mat-form-field>
+      <mat-label>Origin</mat-label>
+      <input matInput #origin id="from" name="from" required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Destination</mat-label>
+      <input matInput #destination id="to" name="to" required />
+    </mat-form-field>
+    <button mat-flat-button type="submit" [disabled]="status() === 'loading'">Search</button>
   </form>
+  @if (status() === 'error') {
+    <p role="alert">Search is temporarily unavailable.</p>
+  } @else if (status() === 'done') {
+    <ul aria-label="Matching flights">
+      @for (flight of flights(); track flight.id) {
+        <li><strong>{{ flight.number }}</strong> · {{ flight.from }} → {{ flight.to }}</li>
+      } @empty {
+        <li>No matching flights.</li>
+      }
+    </ul>
+  }
 </main>
