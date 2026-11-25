@@ -13,6 +13,7 @@
   </form>
   @if (status() === 'error') {
     <p role="alert">Search is temporarily unavailable.</p>
+    <button mat-button type="button" (click)="retry()">Retry</button>
   } @else if (status() === 'done') {
     <p data-testid="flight-count">Matching flights: {{ store.count() }}</p>
     <ul aria-label="Matching flights">

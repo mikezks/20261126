@@ -10,7 +10,11 @@
     "fixtures": "node dev/fixtures.mjs",
     "test:search": "ng test --watch=false --include=src/app/domains/ticketing/flight-search.spec.ts",
     "sheriff": "sheriff verify src/main.ts",
-    "test:count": "ng test --watch=false --include=src/app/domains/ticketing/flight-count.spec.ts"
+    "test:count": "ng test --watch=false --include=src/app/domains/ticketing/flight-count.spec.ts",
+    "check:tools": "tsc --project dev/tsconfig.json --noEmit",
+    "scenario": "node dev/scenario-cli.mjs",
+    "scenario:list": "node dev/inspect-scenario.mts list",
+    "scenario:call": "node dev/inspect-scenario.mts call error_then_success"
   },
   "private": true,
   "packageManager": "npm@11.9.0",
@@ -31,10 +35,14 @@
     "@angular/build": "^22.3.0",
     "@angular/cli": "^22.3.0",
     "@angular/compiler-cli": "^22.3.0",
+    "@modelcontextprotocol/client": "2.4.0",
+    "@modelcontextprotocol/server": "2.4.0",
     "@softarc/sheriff-core": "0.20.0",
+    "@types/node": "24.19.2",
     "jsdom": "^31.0.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.0",
+    "zod": "4.6.7"
   }
 }
